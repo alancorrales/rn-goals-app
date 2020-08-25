@@ -13,14 +13,18 @@ export default function App() {
     setCourseGoals(currentGoals => [...currentGoals, { key: (Date.now() * Math.random()).toString(), value: goal }]);
   }
 
+  const deleteGoalHandler = (goalID) => {
+    setCourseGoals(currentGoals => currentGoals.filter(goal => goal.key !== goalID));
+  }
+
   return (
     // Inline-styling with no special syntax!
     // Only normal react syntax with an object inside!
     <View style={styles.container}>
-      <GoalInput onAddGoalHandler={goal => addGoalHandler(goal)} />
+      <GoalInput onAddGoal={goal => addGoalHandler(goal)} />
 
       <FlatList data={courseGoals} renderItem={itemData => (
-        <GoalItem title={itemData.item.value} />
+        <GoalItem id={itemData.item.key} title={itemData.item.value} onDelete={id => deleteGoalHandler(id)} />
       )} />
     </View>
   );

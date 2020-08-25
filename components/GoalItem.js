@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 
-const GoalItem = ({ title }) => (
-    <View style={styles.listItem}>
-        <Text>
-            {title}
-        </Text>
-    </View>
+const GoalItem = ({ id, title, onDelete }) => (
+    <TouchableWithoutFeedback onPress={() => onDelete(id)}>
+        <View style={styles.listItem}>
+            <Text>
+                {title}
+            </Text>
+        </View>
+    </TouchableWithoutFeedback>
 )
 
 const styles = StyleSheet.create({
